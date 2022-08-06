@@ -9,7 +9,7 @@ namespace rentapp.backend.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "TEST1", "TEST2" };
+            return new string[] { "Property 1", "Property 2" };
         }
     }
 }
