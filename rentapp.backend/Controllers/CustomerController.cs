@@ -15,7 +15,8 @@ namespace rentapp.backend.Controllers
             _customerService = customerService;
         }
 
-        [HttpGet]        
+        [HttpGet]
+        [Route("get")]
         public List<CustomerItemDto> Get()
         {
             return _customerService.GetCustomers();
