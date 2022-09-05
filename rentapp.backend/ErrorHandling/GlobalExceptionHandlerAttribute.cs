@@ -5,8 +5,8 @@ using NLog;
 using rentap.backend.Core.Exceptions;
 using rentap.backend.Core.Helpers;
 using rentapp.BL.Dtos;
-using rentapp.Service.Interfaces;
 using rentapp.Service.Services;
+using rentapp.Service.Services.Interfaces;
 using System.Text;
 
 namespace rentapp.backend.ErrorHandling

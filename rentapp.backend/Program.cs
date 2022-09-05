@@ -1,15 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using NLog;
 using rentapp.backend.Configuration;
+using rentapp.backend.ErrorHandling;
 using rentapp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
-{
-    jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
-}).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 builder.Services.AddCors(options =>
 {
@@ -41,9 +40,21 @@ builder.Services.AddDbContext<DataContext>(option =>
 builder.Services.AddServices();
 
 builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
+{
+    jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
+}).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(typeof(GlobalExceptionHandlerAttribute));
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -59,5 +70,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+GlobalDiagnosticsContext.Set("SqlServerConnection", builder.Configuration.GetConnectionString("SqlServerConnection"));
 
 app.Run();

@@ -21,6 +21,7 @@ namespace rentapp.backend.Configuration
             #region services
 
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IHttpContextService, HttpContextService>();
 
             #endregion
         }
