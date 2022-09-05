@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
-using rentapp.Service.Interfaces;
+using rentapp.Service.Services.Interfaces;
 using System.Text.RegularExpressions;
 
 namespace rentapp.Service.Services

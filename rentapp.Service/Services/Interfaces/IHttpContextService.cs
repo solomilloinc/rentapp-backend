@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace rentapp.Service.Interfaces
+namespace rentapp.Service.Services.Interfaces
 {
     public interface IHttpContextService
     {

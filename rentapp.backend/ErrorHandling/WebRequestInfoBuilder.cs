@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
-using rentapp.Service.Interfaces;
 using rentap.backend.Core.Exceptions;
 using rentap.backend.Core.Helpers;
 using rentapp.backend.Helpers;
+using rentapp.Service.Services.Interfaces;
 
 namespace NG.Web.ErrorHandling
 {
