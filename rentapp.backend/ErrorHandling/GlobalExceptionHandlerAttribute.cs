@@ -24,7 +24,6 @@ namespace rentapp.backend.ErrorHandling
 
         public override Task OnExceptionAsync(ExceptionContext context)
         {
-
             return base.OnExceptionAsync(context);
         }
 

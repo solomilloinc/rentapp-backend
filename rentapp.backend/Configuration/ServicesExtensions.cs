@@ -14,11 +14,15 @@ namespace rentapp.backend.Configuration
 
             #region repositories
 
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             #endregion
 
             #region services
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IJwtUtils, JwtUtils>();
 
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IHttpContextService, HttpContextService>();
