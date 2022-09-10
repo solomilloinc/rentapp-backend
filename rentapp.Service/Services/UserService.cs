@@ -30,7 +30,6 @@ namespace rentapp.Service.Services
         public AuthenticateResponseDto Authenticate(AuthenticateRequestDto model)
         {
             var user = _userRepository.GetByUserName(model.Username);
-
            
             if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
@@ -39,8 +38,6 @@ namespace rentapp.Service.Services
 
             // authentication successful so generate jwt and refresh tokens
             var jwtToken = _jwtUtils.GenerateJwtToken(user);
-
-            //TODO por el momento NO, ya que tenemos que tenerlo en cuenta en la base de datos
 
             var refreshToken = _jwtUtils.GenerateRefreshToken(_httpContextService.GetIPAddress());
             user.RefreshTokens.Add(refreshToken);
