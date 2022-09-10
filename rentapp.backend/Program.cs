@@ -13,7 +13,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 {
-    builder.Services.AddCors();
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("CorsPolicy",
+            builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+    });
+
     builder.Services.AddControllers(options =>
     {
         //options.Filters.Add(typeof(GlobalExceptionHandlerAttribute));
