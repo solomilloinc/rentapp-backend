@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace rentapp.Service.Services
 {
-    public class CustomerService : ICustomerService
+    public class CustomerService : BaseService, ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
 

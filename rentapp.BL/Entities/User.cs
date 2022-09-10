@@ -9,6 +9,7 @@ namespace rentapp.BL.Entities
         {
             UserUserPermissions = new HashSet<UserUserPermission>();
             UserUserRoles = new HashSet<UserUserRole>();
+            RefreshTokens = new List<RefreshToken>();
         }
 
         public int UserId { get; set; }
@@ -26,5 +27,6 @@ namespace rentapp.BL.Entities
         public virtual Customer UserNavigation { get; set; } = null!;
         public virtual ICollection<UserUserPermission> UserUserPermissions { get; set; }
         public virtual ICollection<UserUserRole> UserUserRoles { get; set; }
+        public virtual List<RefreshToken> RefreshTokens { get; set; }
     }
 }

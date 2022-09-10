@@ -83,7 +83,7 @@ namespace rentap.backend.Core.Helpers
 
         public static int GetStatusCode(Exception ex)
         {
-            var statusCode = (int)HttpStatusCode.InternalServerError;
+            var statusCode = (int)HttpStatusCode.BadRequest;
             // TODO: check how we can evaluate an exception and get the status code
             //if (ex is HttpException httpException)
             //{
@@ -95,6 +95,7 @@ namespace rentap.backend.Core.Helpers
                 //to prevent login prompt in IIS which will appear when returning 401.
                 statusCode = (int)HttpStatusCode.Forbidden;
             }
+
             return statusCode;
         }
 

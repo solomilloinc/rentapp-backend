@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using rentapp.BL.Dtos;
 using rentapp.Service.Services.Interfaces;
 
 namespace rentapp.backend.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CustomerController : ControllerBase
@@ -15,11 +17,12 @@ namespace rentapp.backend.Controllers
             _customerService = customerService;
         }
 
+        
         [HttpGet]
-        [Route("get")]
-        public List<CustomerItemDto> Get()
+        [Route("getCustomers")]
+        public IActionResult GetCustomers()
         {
-            return _customerService.GetCustomers();
+            return Ok(_customerService.GetCustomers());
         }
     }
 }

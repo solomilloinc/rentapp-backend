@@ -7,8 +7,8 @@ namespace rentapp.backend.Controllers
     public class PropertyController : ControllerBase
     {
         [HttpGet]
-        [Route("get")]
-        public IEnumerable<string> Get()
+        [Route("getProperties")]
+        public IEnumerable<string> GetProperties()
         {
             return new string[] { "Property 1", "Property 2" };
         }
