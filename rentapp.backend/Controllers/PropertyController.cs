@@ -3,7 +3,7 @@
 namespace rentapp.backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PropertyController : ControllerBase
     {
         [HttpGet]

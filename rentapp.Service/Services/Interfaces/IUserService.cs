@@ -12,7 +12,7 @@ namespace rentapp.Service.Services.Interfaces
     {
         AuthenticateResponseDto Authenticate(AuthenticateRequestDto model);
         AuthenticateResponseDto RefreshToken(string token);
-        void RevokeToken(string token, string ipAddress);
+        void RevokeToken(string token);
         IEnumerable<User> GetAll();
         User GetById(int id);
     }

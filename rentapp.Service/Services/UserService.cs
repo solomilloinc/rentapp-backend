@@ -31,13 +31,8 @@ namespace rentapp.Service.Services
         {
             var user = _userRepository.GetByUserName(model.Username);
 
-            // validate
-            //if (user == null ||!BCrypt.Verify(model.Password, user.Password))
-            //{
-            //    throw new Exception("Username or password is incorrect");
-            //}
-
-            if (user == null || !model.Password.Equals(user.Password))
+           
+            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
                 throw new KeyNotFoundException("Username or password is incorrect");
             }
@@ -47,16 +42,16 @@ namespace rentapp.Service.Services
 
             //TODO por el momento NO, ya que tenemos que tenerlo en cuenta en la base de datos
 
-            //var refreshToken = _jwtUtils.GenerateRefreshToken(_httpContextService.GetIPAddress());
-            //user.RefreshTokens.Add(refreshToken);
+            var refreshToken = _jwtUtils.GenerateRefreshToken(_httpContextService.GetIPAddress());
+            user.RefreshTokens.Add(refreshToken);
 
-            //// remove old refresh tokens from user
-            //removeOldRefreshTokens(user);
+            // remove old refresh tokens from user
+            RemoveOldRefreshTokens(user);
 
-            //// save changes to db
-            //_userRepository.SaveUser(user);
+            // save changes to db
+            _userRepository.SaveUser(user);
 
-            return new AuthenticateResponseDto(user, jwtToken, "refreshToken");
+            return new AuthenticateResponseDto(user, jwtToken, refreshToken.Token);
         }
 
         public AuthenticateResponseDto RefreshToken(string token)
@@ -90,7 +85,7 @@ namespace rentapp.Service.Services
             return new AuthenticateResponseDto(user, jwtToken, newRefreshToken.Token);
         }
 
-        public void RevokeToken(string token, string ipAddress)
+        public void RevokeToken(string token)
         {
             var user = GetUserByRefreshToken(token);
             var refreshToken = user.RefreshTokens.Single(x => x.Token == token);
@@ -99,7 +94,7 @@ namespace rentapp.Service.Services
                 throw new KeyNotFoundException("Invalid token");
 
             // revoke token and save
-            RevokeRefreshToken(refreshToken, ipAddress, "Revoked without replacement");
+            RevokeRefreshToken(refreshToken, _httpContextService.GetIPAddress(), "Revoked without replacement");
             _userRepository.SaveUser(user);
         }
 

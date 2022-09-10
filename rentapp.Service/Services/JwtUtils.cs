@@ -83,6 +83,7 @@ namespace rentapp.Service.Services
                 // token is valid for 7 days
                 Expires = DateTime.UtcNow.AddDays(7),
                 Created = DateTime.UtcNow,
+                RevokedByIp = ipAddress,
                 CreatedByIp = ipAddress
             };
 
