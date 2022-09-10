@@ -114,6 +114,4 @@ app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 
-//GlobalDiagnosticsContext.Set("SqlServerConnection", builder.Configuration.GetConnectionString("SqlServerConnection"));
-
 app.Run();

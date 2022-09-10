@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using rentapp.BL.Dtos;
 using rentapp.BL.Dtos.Auth;
 using rentapp.Service.Services.Interfaces;
 
@@ -27,6 +26,7 @@ namespace rentapp.backend.Controllers
         }
 
         [AllowAnonymous]
+
         [HttpPost("refresh-token")]
         public IActionResult RefreshToken()
         {

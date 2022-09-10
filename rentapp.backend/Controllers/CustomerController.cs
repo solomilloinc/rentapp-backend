@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using rentapp.BL.Dtos;
+﻿using Microsoft.AspNetCore.Mvc;
 using rentapp.Service.Services.Interfaces;
 
 namespace rentapp.backend.Controllers
@@ -23,6 +21,6 @@ namespace rentapp.backend.Controllers
         public IActionResult GetCustomers()
         {
             return Ok(_customerService.GetCustomers());
-        }
+        }        
     }
 }
