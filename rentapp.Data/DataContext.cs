@@ -42,6 +42,8 @@ namespace rentapp.Data
         public virtual DbSet<UserRoleUserPermission> UserRoleUserPermissions { get; set; } = null!;
         public virtual DbSet<UserUserPermission> UserUserPermissions { get; set; } = null!;
         public virtual DbSet<UserUserRole> UserUserRoles { get; set; } = null!;
+        public virtual DbSet<DirectoryCustomer> DirectoryCustomers { get; set; }
+        public virtual DbSet<CustomerAddress> CustomerAddresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -203,111 +205,6 @@ namespace rentapp.Data
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Customer>(entity =>
-            {
-                entity.ToTable("Customer");
-
-                entity.Property(e => e.AdjacentStreet1)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.AdjacentStreet2)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Birthdate).HasColumnType("datetime");
-
-                entity.Property(e => e.City)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Country)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Email)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Floor)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.IsActive)
-                    .IsRequired()
-                    .HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.LastName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Number)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PhoneNumber)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PhoneNumber2)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PlainAdjacentStreet1)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PlainAdjacentStreet2)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PlainCity)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PlainCountry)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PlainState)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PlainStreet)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PlainZipCode)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.State)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Street)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Unit)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ZipCode)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.DocumentType)
-                    .WithMany(p => p.Customers)
-                    .HasForeignKey(d => d.DocumentTypeId)
-                    .HasConstraintName("FK_Customer_DocumentType");
-            });
 
             modelBuilder.Entity<CustomerPayment>(entity =>
             {
@@ -728,7 +625,7 @@ namespace rentapp.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UserName)
+                entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 

@@ -5,7 +5,7 @@ namespace rentapp.BL.Helpers
 {
     public class AddressBuilder
     {
-        public static string GetCustomerAddress(Customer obj)
+        public static string GetCustomerAddress(CustomerAddress obj)
         {
             if (obj.Street.Trim().Length == 0)
             {
@@ -67,71 +67,9 @@ namespace rentapp.BL.Helpers
             return sb.ToString();
         }
 
-        public static string GetSupplierAddress(Customer obj)
+        public static CustomerAddress BuildAddress(string text, string defaultCity, string defaultState, string defaultCountry)
         {
-            if (obj.Street.Trim().Length == 0)
-            {
-                return string.Empty;
-            }
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append(obj.Street);
-
-            if (!string.IsNullOrWhiteSpace(obj.Number))
-            {
-                sb.Append(" ");
-                sb.Append(obj.Number);
-            }
-
-            if (!string.IsNullOrWhiteSpace(obj.Floor))
-            {
-                sb.Append("'");
-                sb.Append(obj.Floor);
-            }
-
-            if (!string.IsNullOrWhiteSpace(obj.Unit))
-            {
-                sb.Append("'");
-                sb.Append(obj.Unit);
-            }
-
-            // si se indico la localidad
-            if (!string.IsNullOrWhiteSpace(obj.City))
-            {
-                sb.Append(", ");
-                sb.Append(obj.City);
-            }
-
-            if (!string.IsNullOrWhiteSpace(obj.State))
-            {
-                sb.Append(", ");
-                sb.Append(obj.State);
-            }
-
-            // si se indico alguna calle adyacente, entonces se la muestra
-            if (!string.IsNullOrWhiteSpace(obj.AdjacentStreet1) || !string.IsNullOrWhiteSpace(obj.AdjacentStreet2))
-            {
-                sb.AppendLine();
-                if (!string.IsNullOrWhiteSpace(obj.AdjacentStreet1) && !string.IsNullOrWhiteSpace(obj.AdjacentStreet2))
-                {
-                    sb.AppendLine($" (Entre {obj.AdjacentStreet1} y {obj.AdjacentStreet2})");
-                }
-                else if (!string.IsNullOrWhiteSpace(obj.AdjacentStreet1))
-                {
-                    sb.AppendLine($" (Esq. {obj.AdjacentStreet1})");
-                }
-                else if (!string.IsNullOrWhiteSpace(obj.AdjacentStreet2))
-                {
-                    sb.AppendLine($" (Esq. {obj.AdjacentStreet2})");
-                }
-            }
-
-            return sb.ToString();
-        }
-
-        public static Customer BuildAddress(string text, string defaultCity, string defaultState, string defaultCountry)
-        {
-            Customer address = new Customer();
+            CustomerAddress address = new CustomerAddress();
 
             string[] mainParts = text.Trim().Split(new char[] { '*' });
 

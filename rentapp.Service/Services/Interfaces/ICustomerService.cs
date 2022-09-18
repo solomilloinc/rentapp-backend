@@ -1,4 +1,4 @@
-﻿using rentapp.BL.Dtos;
+﻿using rentapp.BL.Dtos.Customer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace rentapp.Service.Services.Interfaces
 {
-    public interface ICustomerService
+    public interface ICustomerService: IBaseService
     {
-        List<CustomerItemDto> GetCustomers();
+        Task<List<CustomerItemDto>> GetCustomers();
+        Task<CustomerItemDto> GetById(int id);
+        Task SaveCustomer(CustomerDto dto);
+        Task<CustomerDto> Delete(int id);
     }
 }
