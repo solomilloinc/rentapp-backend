@@ -13,7 +13,7 @@ namespace rentapp.BL.Entities
         }
 
         public int UserId { get; set; }
-        public string UserName { get; set; } = null!;
+        public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;
         public int? CustomerId { get; set; }
         public DateTime DateCreated { get; set; }

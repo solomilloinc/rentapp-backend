@@ -20,7 +20,7 @@ namespace rentapp.BL.Dtos.Auth
         public AuthenticateResponseDto(User user, string jwtToken, string refreshToken)
         {
             Id = user.UserId;
-            UserName = user.UserName;
+            UserName = user.Email;
             JwtToken = jwtToken;
             RefreshToken = refreshToken; 
         }

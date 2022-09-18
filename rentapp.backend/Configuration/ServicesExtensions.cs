@@ -1,4 +1,6 @@
-﻿using rentapp.Data;
+﻿using FluentValidation;
+using rentapp.BL.Dtos.Customer;
+using rentapp.Data;
 using rentapp.Data.Repositories;
 using rentapp.Data.Repositories.Interfaces;
 using rentapp.Service.Services;
@@ -26,6 +28,12 @@ namespace rentapp.backend.Configuration
 
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IHttpContextService, HttpContextService>();
+
+            #endregion
+
+            #region validation
+
+            services.AddScoped<IValidator<CustomerDto>, CustomerValidator>();
 
             #endregion
         }

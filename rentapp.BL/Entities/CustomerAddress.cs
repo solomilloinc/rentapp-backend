@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace rentapp.BL.Entities
 {
-    public partial class Directory
+    public class CustomerAddress
     {
-        public Directory()
-        {
-            Contracts = new HashSet<Contract>();
-            Expenses = new HashSet<Expense>();
-            Properties = new HashSet<Property>();
-            Users = new HashSet<User>();
-        }
-
-        public int DirectoryId { get; set; }
-        public string Name { get; set; } = null!;
+        public int CustomerAddressId { get; set; }
+        public int CustomerId { get; set; }
         public string Street { get; set; } = null!;
         public string PlainStreet { get; set; } = null!;
         public string Number { get; set; } = null!;
@@ -32,21 +27,12 @@ namespace rentapp.BL.Entities
         public string? PlainAdjacentStreet1 { get; set; }
         public string? AdjacentStreet2 { get; set; }
         public string? PlainAdjacentStreet2 { get; set; }
+        public double? Lat { get; set; }
+        public double? Lng { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }
         public int CreatedUserId { get; set; }
         public int? UpdatedUserId { get; set; }
-        public bool? IsActive { get; set; }
-        public string? LogoFilePath { get; set; }
-        public string? Observation { get; set; }
-        public double? Lat { get; set; }
-        public double? Lng { get; set; }
-        public int DocumentTypeId { get; set; }
-        public string DocumentNumber { get; set; }
-
-        public virtual ICollection<Contract> Contracts { get; set; }
-        public virtual ICollection<Expense> Expenses { get; set; }
-        public virtual ICollection<Property> Properties { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }

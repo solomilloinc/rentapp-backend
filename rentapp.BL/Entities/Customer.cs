@@ -11,29 +11,12 @@ namespace rentapp.BL.Entities
             CustomerPaymentFlows = new HashSet<CustomerPaymentFlow>();
             CustomerPayments = new HashSet<CustomerPayment>();
             Properties = new HashSet<Property>();
+            CustomerAddresses = new HashSet<CustomerAddress>();
         }
 
-        public int CustomerId { get; set; }
-        public string Street { get; set; } = null!;
-        public string PlainStreet { get; set; } = null!;
-        public string Number { get; set; } = null!;
-        public string? Floor { get; set; }
-        public string? Unit { get; set; }
-        public string ZipCode { get; set; } = null!;
-        public string PlainZipCode { get; set; } = null!;
-        public string City { get; set; } = null!;
-        public string PlainCity { get; set; } = null!;
-        public string State { get; set; } = null!;
-        public string PlainState { get; set; } = null!;
-        public string Country { get; set; } = null!;
-        public string PlainCountry { get; set; } = null!;
-        public string? AdjacentStreet1 { get; set; }
-        public string? PlainAdjacentStreet1 { get; set; }
-        public string? AdjacentStreet2 { get; set; }
-        public string? PlainAdjacentStreet2 { get; set; }
-        public double? Lat { get; set; }
-        public double? Lng { get; set; }
-        public int? DocumentTypeId { get; set; }
+        public int CustomerId { get; set; }        
+        public int DocumentTypeId { get; set; }
+        public string DocumentNumber { get; set; }
         public string Name { get; set; } = null!;
         public string? LastName { get; set; }
         public DateTime DateCreated { get; set; }
@@ -45,7 +28,6 @@ namespace rentapp.BL.Entities
         public string? Email { get; set; }
         public DateTime? Birthdate { get; set; }
         public string? PhoneNumber2 { get; set; }
-        public int DirectoryId { get; set; }
 
         public virtual DocumentType? DocumentType { get; set; }
         public virtual User User { get; set; } = null!;
@@ -53,5 +35,6 @@ namespace rentapp.BL.Entities
         public virtual ICollection<CustomerPaymentFlow> CustomerPaymentFlows { get; set; }
         public virtual ICollection<CustomerPayment> CustomerPayments { get; set; }
         public virtual ICollection<Property> Properties { get; set; }
+        public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; }
     }
 }

@@ -1,11 +1,12 @@
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using NLog;
 using rentapp.backend.Authorization;
 using rentapp.backend.Configuration;
-using rentapp.backend.ErrorHandling;
 using rentapp.BL.Core.Helpers;
 using rentapp.BL.Entities;
+using rentapp.BL.MappingConfigurations;
 using rentapp.Data;
+using System.Reflection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,9 +25,10 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddControllers(options =>
     {
         //options.Filters.Add(typeof(GlobalExceptionHandlerAttribute));
-    }).AddJsonOptions(x => x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull);
+    });
 
-
+    builder.Services.AddFluentValidationAutoValidation();
+    builder.Services.AddFluentValidationClientsideAdapters();
     builder.Services.AddRouting(options => options.LowercaseUrls = true);
     builder.Services.AddHttpContextAccessor();
 
@@ -58,6 +60,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(typeof(EntityMappingProfile));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -74,37 +78,75 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<DataContext>();
 
-    var customerTest = new Customer()
+    var directoryTest = new rentapp.BL.Entities.Directory()
     {
-        CustomerId = 1,
+        DirectoryId = 1,
         City = "Chivilcoy",
         State = "Buenos Aires",
-        Number = "37976806",
+        Number = "230",
         Name = "Agustin",
-        LastName = "Yuse",
         PlainCity = "chivilcoy",
         PlainStreet = "sarmiento",
         Country = "Argentina",
         PlainCountry = "argentina",
-        Street = "Sarmiento 230",
+        Street = "Sarmiento",
         Unit = "i",
-        PhoneNumber = "2227534620",
         PlainZipCode = "6620",
-        ZipCode = "6620",        
-        DocumentTypeId = 1,
-        Email = "agustinyuse@gmail.com",
+        ZipCode = "6620",
         Floor = "2",
         PlainState = "buenosiares",
-        IsActive = true
+        IsActive = true,
+        DocumentTypeId = 1,
+        DocumentNumber = "20379768068",
+        CreatedUserId = 1
+    };
+
+    context.Directories.Add(directoryTest);
+    context.SaveChanges();
+
+    var customerTest = new Customer()
+    {
+        CustomerId = 1,
+        DocumentNumber = "37976806",
+        Name = "Agustin",
+        LastName = "Yuse",
+        PhoneNumber = "2227534620",
+        DocumentTypeId = 1,
+        Email = "agustinyuse@gmail.com",
+        IsActive = true,
+        CreatedUserId = 1
     };
 
     context.Customers.Add(customerTest);
     context.SaveChanges();
 
+    var customerAddress = new CustomerAddress()
+    {
+        City = "Chivilcoy",
+        State = "Buenos Aires",
+        Number = "230",
+        PlainCity = "chivilcoy",
+        PlainStreet = "sarmiento",
+        Country = "Argentina",
+        PlainCountry = "argentina",
+        Street = "Sarmiento",
+        Unit = "i",
+        PlainZipCode = "6620",
+        ZipCode = "6620",
+        Floor = "2",
+        PlainState = "buenosiares",
+        IsActive = true,
+        CustomerId = 1,
+        CreatedUserId = 1
+    };
+
+    context.CustomerAddresses.Add(customerAddress);
+    context.SaveChanges();
+
     var testUser = new User
     {
         UserId = 1,
-        UserName = "admin",
+        Email = "admin",
         CustomerId = 1,
         Password = BCrypt.Net.BCrypt.HashPassword("test"),
         IsActive = true

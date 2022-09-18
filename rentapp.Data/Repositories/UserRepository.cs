@@ -29,7 +29,7 @@ namespace rentapp.Data.Repositories
 
         public User GetByUserName(string name)
         {
-            return _dataContext.Users.SingleOrDefault(p => p.UserName == name);
+            return _dataContext.Users.SingleOrDefault(p => p.Email == name);
         }
 
         public User GetUserByToken(string token)
